@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>QRT — Data Scientist Commodities | Recruiter Brief</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0b0e14;
+    --surface: #111620;
+    --surface2: #181e2c;
+    --border: #1f2a3d;
+    --accent: #c8a96e;
+    --accent2: #4f83cc;
+    --accent3: #6ecfa0;
+    --warn: #e07a5f;
+    --text: #dde4f0;
+    --muted: #7b8aa0;
+    --heading: #f0f4ff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* Background grain */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  .wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 60px 32px 100px;
+  }
+
+  /* Header */
+  .header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 40px;
+    margin-bottom: 60px;
+  }
+
+  .firm-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .firm-tag::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 900;
+    color: var(--heading);
+    line-height: 1.1;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+
+  h1 span {
+    color: var(--accent);
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .meta-pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 2px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+
+  .meta-pill.highlight {
+    border-color: var(--accent2);
+    color: var(--accent2);
+  }
+
+  /* Section */
+  .section {
+    margin-bottom: 56px;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section:nth-child(2) { animation-delay: 0.05s; }
+  .section:nth-child(3) { animation-delay: 0.10s; }
+  .section:nth-child(4) { animation-delay: 0.15s; }
+  .section:nth-child(5) { animation-delay: 0.20s; }
+  .section:nth-child(6) { animation-delay: 0.25s; }
+  .section:nth-child(7) { animation-delay: 0.30s; }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    font-size: 9px;
+    flex-shrink: 0;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--heading);
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px 32px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--accent);
+  }
+
+  .card.blue::before { background: var(--accent2); }
+  .card.green::before { background: var(--accent3); }
+  .card.red::before { background: var(--warn); }
+
+  .card p {
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  /* Tech grid */
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .tech-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 22px 24px;
+    transition: border-color 0.2s;
+  }
+
+  .tech-item:hover {
+    border-color: var(--accent2);
+  }
+
+  .tech-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent2);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tech-name .badge {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 2px;
+    background: rgba(79,131,204,0.12);
+    color: var(--accent2);
+    border: 1px solid rgba(79,131,204,0.25);
+  }
+
+  .tech-item p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* Stakeholder map */
+  .stakeholder-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+  }
+
+  .stakeholder-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 16px 18px;
+    text-align: center;
+  }
+
+  .stakeholder-card .icon {
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+
+  .stakeholder-card .name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--heading);
+    margin-bottom: 4px;
+  }
+
+  .stakeholder-card .type {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* Candidate profile */
+  .profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 600px) {
+    .profile-grid { grid-template-columns: 1fr; }
+    .tech-grid { grid-template-columns: 1fr; }
+  }
+
+  .profile-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 22px 24px;
+  }
+
+  .profile-block h4 {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent3);
+    margin-bottom: 14px;
+  }
+
+  .profile-block ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .profile-block ul li {
+    font-size: 13.5px;
+    color: var(--text);
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .profile-block ul li:last-child { border-bottom: none; }
+
+  .profile-block ul li::before {
+    content: '→';
+    color: var(--accent3);
+    font-size: 12px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  /* Red flags */
+  .flag-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .flag-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 18px 22px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .flag-item .flag-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .flag-item .flag-content h5 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--warn);
+    margin-bottom: 4px;
+  }
+
+  .flag-item .flag-content p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .flag-item.search { }
+  .flag-item.search .flag-content h5 { color: var(--accent2); }
+
+  /* Pitch section */
+  .pitch-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 32px;
+    position: relative;
+  }
+
+  .pitch-box::after {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 180px;
+    color: rgba(200,169,110,0.05);
+    position: absolute;
+    top: -20px;
+    right: 24px;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .pitch-opener {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    color: var(--accent);
+    font-style: italic;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  .pitch-body p {
+    font-size: 14.5px;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 14px;
+  }
+
+  .pitch-body p:last-child { margin-bottom: 0; }
+
+  .pitch-body strong {
+    color: var(--heading);
+    font-weight: 600;
+  }
+
+  /* Office badge */
+  .office-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(110,207,160,0.1);
+    border: 1px solid rgba(110,207,160,0.3);
+    border-radius: 2px;
+    padding: 6px 16px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent3);
+    margin-bottom: 20px;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  .footnote {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 60px;
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="firm-tag">Recruiter Intelligence Brief</div>
+    <h1>Data Scientist<br/><span>Commodities</span></h1>
+    <div class="meta-row">
+      <div class="meta-pill">Qube Research & Technologies</div>
+      <div class="meta-pill highlight">London · Aarhus</div>
+      <div class="meta-pill">Quantitative / Systematic</div>
+      <div class="meta-pill">3+ Years Experience</div>
+    </div>
+  </div>
+
+  <!-- Section 1 -->
+  <div class="section">
+    <div class="section-label"><span class="num">1</span> What the Role Actually Does</div>
+    <h2>In Plain English</h2>
+    <div class="card">
+      <p>
+        This person is the data plumbing specialist for QRT's commodities trading desk. Their job is to take raw, messy data from a wide range of sources — think energy prices, shipping volumes, weather feeds, satellite imagery, and conventional market data — and turn it into clean, reliable, decision-ready datasets that researchers and traders can actually use to generate alpha.
+      </p>
+    </div>
+    <div class="card blue">
+      <p>
+        They sit between the quantitative researchers who build trading models and the data engineers who manage the infrastructure. Think of them as a translator: they understand what the researchers need, know how to get the data from disparate sources, and can write the code to clean, transform, and structure it into something useful. They are not building trading strategies themselves — but without them, the strategies cannot be built.
+      </p>
+    </div>
+    <div class="card green">
+      <p>
+        On a daily basis this could involve writing Python scripts to ingest a new alternative data feed from a satellite provider, cleaning inconsistencies in an energy futures time series, working with an external vendor to understand a new dataset, or prototyping a pipeline to extract structured information from unstructured documents (PDFs, HTML pages, etc.). The commodities angle means they will handle a lot of physical market data — oil inventories, gas flows, crop reports — which is inherently messier than equity data.
+      </p>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- Section 2 -->
+  <div class="section">
+    <div class="section-label"><span class="num">2</span> Firm Positioning & Stakeholders</div>
+    <h2>Where it Sits in the Firm</h2>
+    <div class="office-badge">⚡ Quant Research / Front Office Adjacent</div>
+    <div class="card">
+      <p>
+        This role sits in the intersection of the Front Office and Technology. It is not a pure engineering role (they are not building infrastructure) and it is not a pure research role (they are not building alpha models). QRT describes it as working "between the Research and Trading desks and the Engineering team" — which is exactly the Data Science function: a bridge layer.
+      </p>
+    </div>
+    <div style="margin-top: 24px;">
+      <div class="section-label" style="margin-bottom:16px;">Key Stakeholders</div>
+      <div class="stakeholder-grid">
+        <div class="stakeholder-card">
+          <div class="icon">📈</div>
+          <div class="name">Commodities Traders</div>
+          <div class="type">Primary consumer of outputs</div>
+        </div>
+        <div class="stakeholder-card">
+          <div class="icon">🔬</div>
+          <div class="name">Quantitative Researchers</div>
+          <div class="type">Define data requirements for models</div>
+        </div>
+        <div class="stakeholder-card">
+          <div class="icon">⚙️</div>
+          <div class="name">Data Engineers</div>
+          <div class="type">Infrastructure partners</div>
+        </div>
+        <div class="stakeholder-card">
+          <div class="icon">🏢</div>
+          <div class="name">Management</div>
+          <div class="type">Reporting & prioritisation</div>
+        </div>
+        <div class="stakeholder-card">
+          <div class="icon">🌐</div>
+          <div class="name">External Data Vendors</div>
+          <div class="type">Alternative data providers</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- Section 3 -->
+  <div class="section">
+    <div class="section-label"><span class="num">3</span> Technology Stack Explained</div>
+    <h2>Every Technology, Decoded</h2>
+    <div class="tech-grid">
+
+      <div class="tech-item">
+        <div class="tech-name">Python <span class="badge">Core Language</span></div>
+        <p>The dominant programming language in quantitative finance for data work. Used to write every data pipeline, cleaning script, and transformation in this role. Think of it as the lingua franca of modern data science.</p>
+      </div>
+
+      <div class="tech-item">
+        <div class="tech-name">Pandas <span class="badge">Library</span></div>
+        <p>A Python library for working with tabular data (like spreadsheets, but at scale). Used to load, filter, reshape, and analyse structured datasets — essential for any time series or market data manipulation.</p>
+      </div>
+
+      <div class="tech-item">
+        <div class="tech-name">NumPy <span class="badge">Library</span></div>
+        <p>Python's core numerical computing library. Works under the hood of almost everything financial in Python. Used for high-speed mathematical operations on large arrays of numbers — price data, returns, etc.</p>
+      </div>
+
+      <div class="tech-item">
+        <div class="tech-name">Data Pipelines <span class="badge">Concept</span></div>
+        <p>Automated workflows that move data from a raw source (say, an API or file dump) through cleaning and transformation steps, and into a final usable form. This candidate will design and maintain these for the commodities desk.</p>
+      </div>
+
+      <div class="tech-item">
+        <div class="tech-name">Alternative Data <span class="badge">Data Type</span></div>
+        <p>Non-traditional financial data used to generate trading signals. In commodities this includes satellite imagery of oil tankers or crop fields, weather forecasts, shipping AIS data, social sentiment, and supply chain indicators. Extracting and cleaning this is significantly harder than standard market data.</p>
+      </div>
+
+      <div class="tech-item">
+        <div class="tech-name">Traditional Financial Data <span class="badge">Data Type</span></div>
+        <p>Standard market data: prices, volumes, open interest, futures curves, and economic releases. Providers include Bloomberg, Refinitiv, ICE, and CME. The candidate needs comfort with both this and alternative data.</p>
+      </div>
+
+      <div class="tech-item">
+        <div class="tech-name">ETL / Data Onboarding <span class="badge">Process</span></div>
+        <p>Extract, Transform, Load — the end-to-end process of getting a new dataset into a usable state within the firm's systems. The JD explicitly calls this out as a core responsibility, from initial evaluation of a dataset through to production use.</p>
+      </div>
+
+      <div class="tech-item">
+        <div class="tech-name">Data Extraction & Parsing <span class="badge">Technique</span></div>
+        <p>Converting raw formats (PDFs, HTML pages, APIs, CSVs, XML feeds, databases) into structured data. In commodities this might mean pulling supply reports from government websites, parsing shipping manifests, or scraping exchange data.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- Section 4 -->
+  <div class="section">
+    <div class="section-label"><span class="num">4</span> Ideal Candidate Profile</div>
+    <h2>Who You Are Looking For</h2>
+    <div class="profile-grid">
+
+      <div class="profile-block">
+        <h4>Seniority & Experience</h4>
+        <ul>
+          <li>3 to 6 years in a data science or quant research adjacent role</li>
+          <li>Mid-level; not a junior hire, not a head of department</li>
+          <li>Has shipped production data pipelines, not just notebooks</li>
+          <li>Buy-side experience is a strong plus — but not essential</li>
+        </ul>
+      </div>
+
+      <div class="profile-block">
+        <h4>Educational Background</h4>
+        <ul>
+          <li>Masters or PhD in Mathematics, Physics, Engineering, or Statistics</li>
+          <li>Computer Science with a heavy quant flavour may work</li>
+          <li>Strong academic pedigree expected given QRT culture</li>
+          <li>Undergraduate only will likely not pass the CV screen</li>
+        </ul>
+      </div>
+
+      <div class="profile-block">
+        <h4>Target Firms to Source From</h4>
+        <ul>
+          <li>Other systematic funds: Man Group, Two Sigma, WorldQuant, Winton, AHL</li>
+          <li>Commodities quant desks: Vitol, Trafigura, Gunvor, Koch Supply</li>
+          <li>Alternative data vendors: Orbital Insight, Kayrros, SpaceKnow</li>
+          <li>Energy majors with quant teams: Shell, BP Trading</li>
+          <li>Data science teams at major banks: JPM, Goldman, Barclays commodity desks</li>
+        </ul>
+      </div>
+
+      <div class="profile-block">
+        <h4>Soft Profile & Personality</h4>
+        <ul>
+          <li>Intellectually curious — reads about markets outside of work</li>
+          <li>Comfort with ambiguity; raw data is rarely clean</li>
+          <li>Strong communicator across technical and non-technical audiences</li>
+          <li>High ownership mindset — end-to-end thinker</li>
+          <li>Works well in fast-paced, performance-driven environments</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- Section 5 -->
+  <div class="section">
+    <div class="section-label"><span class="num">5</span> Red Flags & Search Complexity</div>
+    <h2>What to Watch Out For</h2>
+    <div class="flag-list">
+
+      <div class="flag-item">
+        <div class="flag-icon">⚠️</div>
+        <div class="flag-content">
+          <h5>The ML Engineer Misfit</h5>
+          <p>Many candidates will have "Data Scientist" on their CV but spend the majority of their time building machine learning models rather than data pipelines. QRT wants someone who is obsessed with data quality and engineering, not someone primarily focused on model building. Screen carefully for pipeline and ETL experience versus pure modelling work.</p>
+        </div>
+      </div>
+
+      <div class="flag-item">
+        <div class="flag-icon">⚠️</div>
+        <div class="flag-content">
+          <h5>No Financial Markets Interest</h5>
+          <p>The JD explicitly calls out a "demonstrable interest in financial markets." This is not a generic data science role. Candidates from pure tech or non-finance verticals who cannot speak to markets will not clear the interview process regardless of technical quality.</p>
+        </div>
+      </div>
+
+      <div class="flag-item">
+        <div class="flag-icon">⚠️</div>
+        <div class="flag-content">
+          <h5>The Dual Location Complexity</h5>
+          <p>This role is listed for both London and Aarhus. Aarhus is a very specific relocation requirement — a small Danish city with a limited local talent pool. Clarify upfront with the client which location is preferred and whether relocation support exists for London candidates, or whether these are genuinely separate headcount.</p>
+        </div>
+      </div>
+
+      <div class="flag-item search">
+        <div class="flag-icon">🔍</div>
+        <div class="flag-content">
+          <h5>Search Complexity: Commodities Data Specialism</h5>
+          <p>The commodities angle narrows the pool considerably. Equity and credit quant data scientists are far more numerous. Physical commodities data (energy flows, satellite, shipping AIS) is a niche within a niche. Expect a longer search and be prepared to consider candidates with strong data engineering skills in commodities even if their buy-side experience is limited.</p>
+        </div>
+      </div>
+
+      <div class="flag-item search">
+        <div class="flag-icon">🔍</div>
+        <div class="flag-content">
+          <h5>Search Complexity: QRT's High Bar</h5>
+          <p>QRT is a top-tier systematic fund with a notoriously rigorous hiring process. Candidates need both technical excellence and academic pedigree. Managing candidate expectations around process length and interview depth will be important. Average time to offer at firms like this is often 8 to 12 weeks.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- Section 6 -->
+  <div class="section">
+    <div class="section-label"><span class="num">6</span> Candidate Pitch</div>
+    <h2>How to Sell This Role</h2>
+    <div class="pitch-box">
+      <div class="pitch-opener">
+        "I wanted to reach out about a data science role that I think is genuinely different to most of what you will see on the market."
+      </div>
+      <div class="pitch-body">
+        <p>
+          <strong>Open with the firm, not the title.</strong> QRT is one of the most respected systematic investment managers in the world. They have a serious reputation for intellectual rigour, strong performance, and genuine investment in their people. For a quantitative data scientist, this is a brand that carries real weight.
+        </p>
+        <p>
+          <strong>Sell the problem, not the job spec.</strong> This is not a role where you will be handed clean data and asked to build models. You will be solving genuinely hard data problems — extracting signal from some of the most complex and heterogeneous datasets in finance. Commodities data is messy, global, and often physical in nature. If you have ever wanted to work on satellite imagery of oil fields or AIS shipping data at a firm with the infrastructure and budget to actually do something with it, this is the opportunity.
+        </p>
+        <p>
+          <strong>Pitch the position in the firm.</strong> You sit at the intersection of research, trading, and engineering. Your work directly influences investment decisions. This is not a support function — the trading desk depends on what you deliver. There is high visibility and a clear line of sight between your output and firm performance.
+        </p>
+        <p>
+          <strong>Close with the practical.</strong> It is based in London (or Aarhus if relevant), the comp is competitive with top quant funds, and the team is small enough that your individual contribution matters. This is the kind of role that does not come up often — and when it does at a firm like QRT, it attracts serious attention.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footnote">
+    Intelligence Brief — QRT Data Scientist Commodities · Prepared for internal recruiter use
+  </div>
+
+</div>
+</body>
+</html>
